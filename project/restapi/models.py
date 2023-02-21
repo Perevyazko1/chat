@@ -8,6 +8,9 @@ class Room(models.Model):
         verbose_name_plural = u"Комнаты"
     name_room = models.TextField(verbose_name='Название комнаты')
 
+    def __str__(self):
+        return self.name_room
+
 
 class Message(models.Model):
     class Meta:
@@ -23,6 +26,5 @@ class Message(models.Model):
         return f'{self.messageUser} : {self.messageText}'
 
 
-class RoomConnection(models.Model):
-    room = models.ForeignKey(Room, on_delete=models.CASCADE)
-    users = models.ForeignKey(User, on_delete=models.CASCADE)
+class SimpleUser(models.Model):
+    avatar = models.ImageField(upload_to='images/', default=None)

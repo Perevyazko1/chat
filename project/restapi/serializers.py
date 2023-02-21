@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import Message
+from .models import Message, Room
 from django.contrib.auth.models import User
 
 
@@ -13,4 +13,10 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 class MessageSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Message
-        fields = ('messageUser', 'messageText')
+        fields = ('messageUser', 'messageText', 'room')
+
+
+class RoomSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Room
+        fields = ('name_room',)
