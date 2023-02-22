@@ -1,13 +1,14 @@
 from rest_framework import serializers
 
-from .models import Message, Room
+from .models import Message, Room, userProfile
 from django.contrib.auth.models import User
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class userProfileSerializer(serializers.ModelSerializer):
+    user=serializers.StringRelatedField(read_only=True)
     class Meta:
-        model = User
-        fields = ('username', 'email', 'first_name', 'last_name')
+        model=userProfile
+        fields='__all__'
 
 
 class MessageSerializer(serializers.HyperlinkedModelSerializer):

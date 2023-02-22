@@ -26,5 +26,6 @@ class Message(models.Model):
         return f'{self.messageUser} : {self.messageText}'
 
 
-class SimpleUser(models.Model):
+class userProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     avatar = models.ImageField(upload_to='images/', default=None)
