@@ -27,10 +27,10 @@ class userProfileDetailView(RetrieveUpdateDestroyAPIView):
 
 
 
-class MessageViewSet(viewsets.ModelViewSet):
+class MessageViewSet(ListCreateAPIView):
     queryset = Message.objects.all().order_by('dateCreation')
     serializer_class = MessageSerializer
-    permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]
+    # permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]
 
 
 
@@ -38,4 +38,4 @@ class MessageViewSet(viewsets.ModelViewSet):
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all().order_by('name_room')
     serializer_class = RoomSerializer
-    permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]
+    # permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]

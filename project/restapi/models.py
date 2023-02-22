@@ -9,7 +9,7 @@ class Room(models.Model):
     name_room = models.TextField(verbose_name='Название комнаты')
 
     def __str__(self):
-        return self.name_room
+        return f'{self.name_room} {self.pk}'
 
 
 class Message(models.Model):

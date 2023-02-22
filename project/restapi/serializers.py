@@ -11,10 +11,10 @@ class userProfileSerializer(serializers.ModelSerializer):
         fields='__all__'
 
 
-class MessageSerializer(serializers.HyperlinkedModelSerializer):
+class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = ('messageUser', 'messageText', 'room')
+        fields = '__all__'
 
 
 class RoomSerializer(serializers.HyperlinkedModelSerializer):
