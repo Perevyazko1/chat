@@ -1,6 +1,7 @@
 from rest_framework.generics import (ListCreateAPIView,RetrieveUpdateDestroyAPIView,)
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsOwnerProfileOrReadOnly
+from django.shortcuts import render
 
 
 from rest_framework import viewsets
@@ -26,16 +27,15 @@ class userProfileDetailView(RetrieveUpdateDestroyAPIView):
     permission_classes=[IsOwnerProfileOrReadOnly,IsAuthenticated]
 
 
-
 class MessageViewSet(ListCreateAPIView):
     queryset = Message.objects.all().order_by('dateCreation')
     serializer_class = MessageSerializer
     # permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]
 
 
-
-
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all().order_by('name_room')
     serializer_class = RoomSerializer
     # permission_classes = [IsOwnerProfileOrReadOnly, IsAuthenticated]
+
+

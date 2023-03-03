@@ -29,7 +29,7 @@ class Migration(migrations.Migration):
             name='RoomConnection',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='restapi.room')),
+                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='backend.room')),
                 ('users', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('messageText', models.TextField(verbose_name='Сообщение')),
                 ('dateCreation', models.DateTimeField(auto_now_add=True, verbose_name='Дата')),
                 ('messageUser', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL, verbose_name='Пользователь')),
-                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='restapi.room', verbose_name='Комната')),
+                ('room', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='backend.room', verbose_name='Комната')),
             ],
             options={
                 'verbose_name': 'Сообщение',
