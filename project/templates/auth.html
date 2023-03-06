@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    Авторизация
+    <div>
+  <form name="publish">
+    <input type="text" name="login" placeholder="введите логин"/>
+    <input type="text" name="parol" placeholder="введите пароль"/>
+    <input type="submit" value="войти"/>
+  </form>
+</div>
+
+
+<script>
+
+    document.forms.publish.onsubmit = function() {
+  var login = this.login.value;
+  var parol = this.parol.value;
+
+
+
+
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                    headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json',
+                        // 'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        // 'Authorization': "Token " + localStorage.getItem('auth_token'),
+                        //'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return await response.json(); // parses JSON response into native JavaScript objects
+}
+
+postData('http://127.0.0.1:8000/chat/token/', { username: login,password: parol })
+  .then((data) => {
+    console.log(data.token); // JSON data parsed by `response.json()` call
+  });
+return false;
+};
+
+</script>
+
+</body>
+</html>
