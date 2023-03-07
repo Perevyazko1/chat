@@ -17,7 +17,7 @@
 
 <script>
 
-    document.forms.publish.onsubmit = function() {
+    document.forms.publish.onsubmit = function (key, value) {
         const login = this.login.value;
         const parol = this.parol.value;
 
@@ -41,7 +41,7 @@
 
     postData('http://127.0.0.1:8000/chat/token/', { username: login,password: parol })
     .then((data) => {
-    console.log(data.token); // JSON data parsed by `response.json()` call
+    localStorage.setItem("token",data.token);
   });
 
     async function postAuth(url = '') {
@@ -52,7 +52,7 @@
         'Content-Type': 'application/json',
         // 'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
-         'Authorization': "Token cf4b0de8951d3e5d55e435f8ff9f459043eb31f9" //+ localStorage.getItem('auth_token'),
+         'Authorization': "Token " + localStorage.getItem('token'),
         //'Content-Type': 'application/x-www-form-urlencoded',
     },
     //body: JSON.stringify(data) // body data type must match "Content-Type" header
