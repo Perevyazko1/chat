@@ -10,9 +10,12 @@ from rest_framework.authentication import SessionAuthentication,TokenAuthenticat
 class Index(APIView):
     permission_classes = (IsAuthenticated,)
     authentication_classes = (TokenAuthentication,)
+
     def post(self, request):
         return render(request, "index.html")
 
+def index(request):
+    return render(request, "index.html")
 # class Index(APIView):
 #     # permission_classes = (IsAuthenticated,)
 #     permission_classes = (IsAuthenticated,)
