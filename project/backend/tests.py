@@ -3,15 +3,19 @@ from rest_framework.test import APITestCase
 from rest_framework import status
 from django.contrib.auth.models import User
 
-# test the user registration endpoint
+"""Тест на сохранение Пользователя в БД"""
+
+
 class RegistrationTestCase(APITestCase):
     def test_registration(self):
         data={"username":"lynn","password":"PASwwordLit","email":"lynn@gmail.com"}
         response=self.client.post('/auth/users/',data)
         self.assertEqual(response.status_code,status.HTTP_201_CREATED)
 
+
 class userProfileTestCase(APITestCase):
     profile_list_url=reverse('all-profiles')
+
     def setUp(self):
         # создайте нового пользователя, отправив запрос к конечной точке djoser
         self.user=self.client.post('/auth/users/',data={'username':'mario','password':'i-keep-jumping'})
@@ -39,7 +43,6 @@ class userProfileTestCase(APITestCase):
         response=self.client.get(reverse('profile',kwargs={'pk':1}))
         # print(response.data)
         self.assertEqual(response.status_code,status.HTTP_200_OK)
-
 
     # заполнить профиль пользователя, который был автоматически создан с использованием сигналов
     def test_userprofile_profile(self):

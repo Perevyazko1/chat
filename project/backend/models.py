@@ -3,6 +3,7 @@ from django.db import models
 
 
 class Room(models.Model):
+    """Модель комнаты, но она не подключена к JS"""
     class Meta:
         verbose_name = u"Комната"
         verbose_name_plural = u"Комнаты"
@@ -13,6 +14,7 @@ class Room(models.Model):
 
 
 class Message(models.Model):
+    """Модель сообщения, но она не подключена к JS"""
     class Meta:
         verbose_name = u"Сообщение"
         verbose_name_plural = u"Сообщения"
@@ -27,5 +29,6 @@ class Message(models.Model):
 
 
 class userProfile(models.Model):
+    """Модель Пользователя"""
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="profile")
     avatar = models.ImageField(upload_to='images/', default=None)

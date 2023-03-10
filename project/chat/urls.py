@@ -5,7 +5,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 
 urlpatterns = [
-    path('', views.index),
+    path('', views.auth),
     path('auth_api/', views.Index.as_view()),
     path('token/', obtain_auth_token),
     path("<str:room_name>/", views.room, name="room"),
