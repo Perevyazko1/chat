@@ -5,8 +5,9 @@
     <title>Title</title>
 </head>
 <body>
-    Авторизация
+
     <div>
+        Авторизация
   <form name="publish">
     <input type="text" name="login" placeholder="введите логин"/>
     <input type="text" name="parol" placeholder="введите пароль"/>
@@ -20,7 +21,6 @@
     document.forms.publish.onsubmit = function (key, value) {
         const login = this.login.value;
         const parol = this.parol.value;
-
 
         async function postData(url = '', data = {}) {
         const response = await fetch(url, {
@@ -62,7 +62,7 @@
 
     postAuth('http://127.0.0.1:8000/chat/auth_api/')
       .then((data) => {
-        console.log(data); // JSON data parsed by `response.json()` call
+        window.location.href = 'index.html'; // JSON data parsed by `response.json()` call
       });
     return false;
         };

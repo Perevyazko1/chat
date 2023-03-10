@@ -6,10 +6,20 @@
     <title>Chat Rooms</title>
 </head>
 <body>
-    В какой чат вы хотите войти?<br>
-    <input id="room-name-input" type="text" size="100"><br>
-    <input id="room-name-submit" type="button" value="Enter">
+        <div id="block_auth" style="display: block;">
+        Авторизация
+  <form name="publish">
+    <input type="text" name="login" placeholder="введите логин"/>
+    <input type="text" name="parol" placeholder="введите пароль"/>
+    <input type="submit" value="войти"/>
+  </form>
+</div>
 
+    <div id="block_id" style="display: none;">
+        В какой чат вы хотите войти?<br>
+        <input id="room-name-input" type="text" size="100"><br>
+        <input id="room-name-submit" type="button" value="Enter">
+    </div>
     <script>
         document.querySelector('#room-name-input').focus();
         document.querySelector('#room-name-input').onkeyup = function(e) {
@@ -22,6 +32,78 @@
             var roomName = document.querySelector('#room-name-input').value;
             window.location.pathname = '/chat/' + roomName + '/';
         };
+
+        function showHide(element_id) {
+                //Если элемент с id-шником element_id существует
+                if (document.getElementById(element_id)) {
+                    //Записываем ссылку на элемент в переменную obj
+                    var obj = document.getElementById(element_id);
+                    //Если css-свойство display не block, то:
+                    if (obj.style.display != "block") {
+                        obj.style.display = "block"; //Показываем элемент
+                    }
+                    else obj.style.display = "none"; //Скрываем элемент
+                }
+                //Если элемент с id-шником element_id не найден, то выводим сообщение
+                else alert("Элемент с id: " + element_id + " не найден!");
+            }
+
+                document.forms.publish.onsubmit = function (key, value) {
+        const login = this.login.value;
+        const parol = this.parol.value;
+
+        async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json',
+                        // 'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        // 'Authorization': "Token " + localStorage.getItem('auth_token'),
+                        //'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+
+        return await response.json(); // parses JSON response into native JavaScript objects
+        }
+
+    postData('http://127.0.0.1:8000/chat/token/', { username: login,password: parol })
+    .then((data) => {
+    localStorage.setItem("token",data.token);
+  });
+
+    async function postAuth(url = '') {
+    const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        // 'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
+         'Authorization': "Token " + localStorage.getItem('token'),
+        //'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    //body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+    return await response; // parses JSON response into native JavaScript objects
+}
+
+    postAuth('http://127.0.0.1:8000/chat/auth_api/')
+      .then((response) => {
+          if (response.status===200){
+              alert('Успех')
+                      showHide('block_auth'); // JSON data parsed by `response.json()` call
+          showHide('block_id');
+
+          } else {
+              alert('логин или пароль не верный.')
+          }
+      });
+    return false;
+        };
+
     </script>
 </body>
 </html>
