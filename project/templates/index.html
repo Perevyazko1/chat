@@ -70,7 +70,7 @@
         return await response.json(); // parses JSON response into native JavaScript objects
         }
 
-        postData('http://127.0.0.1:8000/chat/token/', { username: login,password: parol })
+        postData('http://127.0.0.1:8000/api/token/', { username: login,password: parol })
         .then((data) => {
         localStorage.setItem("token",data.token);
       });
@@ -91,7 +91,7 @@
         return await response; // parses JSON response into native JavaScript objects
         }
 
-        postAuth('http://127.0.0.1:8000/chat/auth_api/')
+        postAuth('http://127.0.0.1:8000/api/auth_api/')
           .then((response) => {
               if (response.status===200){
                   alert('Успех')
