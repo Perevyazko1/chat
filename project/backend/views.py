@@ -3,6 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
+from django.contrib.auth.models import User
 
 
 from .permissions import IsOwnerProfileOrReadOnly
@@ -16,13 +17,13 @@ from .models import Message, Room, userProfile
 
 class UserProfileListCreateView(ListCreateAPIView):
     """Создание Пользователя RESTAPI"""
-    queryset = userProfile.objects.all()
+    queryset = User.objects.all()
     serializer_class = userProfileSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
-    def perform_create(self, serializer):
-        user = self.request.user
-        serializer.save(user=user)
+    # def perform_create(self, serializer):
+    #     user = self.request.user
+    #     serializer.save(user=user)
 
 
 class userProfileDetailView(RetrieveUpdateDestroyAPIView):

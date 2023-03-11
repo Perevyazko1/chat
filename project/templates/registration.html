@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+        Авторизация
+  <form name="registration">
+    <input type="text" name="login" placeholder="введите логин"/>
+    <input type="text" name="parol" placeholder="введите пароль"/>
+    <input type="submit" value="зарегистрироваться"/>
+  </form>
+
+
+<script>
+        document.forms.registration.onsubmit = function (key, value) {
+        const login = this.login.value;
+        const parol = this.parol.value;
+
+                async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json',
+                        // 'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                        // 'Authorization': "Token " + localStorage.getItem('auth_token'),
+                        //'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+
+        return await response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        postData('http://127.0.0.1:8000/api/profile/', { username: login,password: parol })
+        .then((response) => {
+                  window.open('http://127.0.0.1:8000')
+
+      });
+        return false;
+            };
+
+
+</script>
+</body>
+</html>
