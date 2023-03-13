@@ -55,6 +55,7 @@ class Index(APIView):
     def post(self, request):
         content = {
             'user': str(request.user),  # `django.contrib.auth.User` instance.
-            'auth': str(request.auth),  # None
+            'auth': str(request.auth),
+            'name': str(request.user.first_name)# None
         }
         return Response(content)

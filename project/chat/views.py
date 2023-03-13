@@ -16,3 +16,8 @@ def room(request, room_name):
 def registration(request):
     """Регистрация вход и создание чата"""
     return render(request, "registration.html")
+
+
+def profile(request):
+    """Страница пользователя"""
+    return render(request, "profile.html")

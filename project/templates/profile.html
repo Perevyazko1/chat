@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Моя страница</title>
+</head>
+<body>
+Моя страница
+<p id="user"> Логин: </p>
+<p id="nameUser"> Имя: </p>
+<p id="photo"> Фото: </p>
+<script>
+
+            async function postData(url = '', data = {}) {
+        const response = await fetch(url, {
+            method: 'POST', // *GET, POST, PUT, DELETE, etc.
+            headers: {
+                        'Accept': 'application/json, text/plain, */*',
+                        'Content-Type': 'application/json',
+                        // 'Accept': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest',
+                         'Authorization': "Token " + localStorage.getItem('token'),
+                        //'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+            body: JSON.stringify(data) // body data type must match "Content-Type" header
+        });
+
+        return await response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        postData('http://127.0.0.1:8000/api/auth_api/', {})
+        .then((data) => {
+        console.log(localStorage.getItem("name"));
+        localStorage.setItem("user",data.user);
+        localStorage.setItem("name",data.name);
+        });
+
+    nameUser = document.getElementById('nameUser')
+    nameUser.innerHTML += localStorage.getItem("name")
+    user = document.getElementById('user')
+    user.innerHTML += localStorage.getItem("user")
+
+</script>
+</body>
+</html>
