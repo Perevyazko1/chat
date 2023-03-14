@@ -1,11 +1,11 @@
 from django.urls import path
 
-from . import views
+from .views import auth, registration,profile
 
 
 urlpatterns = {
-    path('', views.auth),
-    path('registration/', views.registration),
-    path('profile/', views.profile),
+    path('auth/', auth),
+    path('registration/', registration),
+    path('myprofile/', profile),
     # path("<str:room_name>/", views.room, name="room"),
 }

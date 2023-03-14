@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from .models import Message, Room, userProfile
 from django.contrib.auth.models import User
+from django.core.files import File
+import base64
 
 
 class userProfileSerializer(serializers.ModelSerializer):
@@ -31,3 +33,19 @@ class RoomSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Room
         fields = ('name_room',)
+
+
+class ImageSerializer(serializers.ModelSerializer):
+
+    base64_image = serializers.SerializerMethodField()
+
+    class Meta:
+        model = userProfile
+        fields = '__all__'
+
+    def get_base64_image(self, obj):
+        f = open(obj.avatar.path, 'rb')
+        image = File(f)
+        data = base64.b64encode(image.read())
+        f.close()
+        return data
