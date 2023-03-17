@@ -21,6 +21,7 @@
         В какой чат вы хотите войти?<br>
         <input id="room-name-input" type="text" size="100"><br>
         <input id="room-name-submit" type="button" value="Enter">
+        <a href="http://127.0.0.1:8000/myprofile/">Моя страница</a>
     </div>
 
     <script>
@@ -33,7 +34,7 @@
 
         document.querySelector('#room-name-submit').onclick = function(e) {
             var roomName = document.querySelector('#room-name-input').value;
-            window.location.pathname = '/chat/' + roomName + '/';
+            window.location.pathname = '/room/' + roomName + '/';
         };
 
         function showHide(element_id) {
@@ -100,7 +101,7 @@
           .then((response) => {
               if (response.status===200){
                   console.log(response)
-                  alert('Успех')
+                  //alert('Успех')
                           showHide('block_auth'); // JSON data parsed by `response.json()` call
               showHide('block_id');
 
